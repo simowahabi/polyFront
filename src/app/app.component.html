@@ -1,0 +1,135 @@
+<div *ngIf="myspinner ">
+  <div class="bg">
+    <div class="lds-facebook"><div></div><div></div><div></div></div>
+  </div>
+  </div>
+
+    <div class="container">
+    <div class="row">
+<h4 class="title">Projet de Polytechnique</h4>
+<h5 class="names">Réalisé par: Wahabi Mohamed</h5>
+<h5 class="names">Encadré par: Faissal Sehbaoui</h5>
+<hr>
+
+<br>
+<br>
+<form class="form-inline" #f="ngForm" (ngSubmit)="onSubmit(f)">
+    <div class="col-lg-4">
+<div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+    <input class="mdl-textfield__input" type="date" id="datee" name="mdate" ngModel>
+    <label class="mdl-textfield__label" for="datee">Date</label>
+  </div>
+    </div>
+  <div class="col-lg-3">
+  <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+      <input class="mdl-textfield__input" type="text" id="posx" name="posx" ngModel>
+      <label class="mdl-textfield__label" for="posx">position x</label>
+    </div>
+  </div>
+    <div class="col-lg-3">
+    <div class=" mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+        <input class="mdl-textfield__input" type="text" id="posy" name="posy" ngModel>
+        <label class="mdl-textfield__label" for="posy">position y</label>
+      </div>
+    </div>
+
+    <div class="col-lg-2 margbut">
+    <button type="submit" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent">
+        Search
+      </button>
+    </div>
+      </form>
+  </div>
+<h3>Search Result :</h3>
+
+<div *ngIf="data1==null ;else dataactive">
+    <table class="tabresult mdl-data-table mdl-js-data-table mdl-shadow--2dp">
+  <h4>No Result</h4>
+  </table>
+  </div>
+
+<ng-template #dataactive>
+  <div class="marow">
+  <table class="tabresult mdl-data-table mdl-js-data-table mdl-shadow--2dp">
+      <thead>
+        <tr>
+          <th>Id</th>
+          <th class="">Date</th>
+          <th>Position</th>
+          <th >D1</th>
+          <th>D2</th>
+          <th>D3</th>
+          <th>D4</th>
+          <th>D5</th>
+          <th>D6</th>
+          <th>Obj
+          </th>
+          <th>Update</th>
+          <th>Add Obj</th>
+
+
+        </tr>
+      </thead>
+      <tbody>
+
+        <tr *ngFor="let d1 of datatotal ;let i = index ">
+           <td>{{i+1}}</td>
+          <td class="">{{d1.mdate}}</td>
+          <td class="">{{d1.posx}} -- {{d1.posy}}</td>
+          <input type="hidden" value="{{d1.id}}">
+          <td ><input type="text" class="outlinehide"  [(ngModel)]="datatotal[i].D1" value="{{d1.D1}}"> </td>
+          <td ><input type="text" class="outlinehide" [(ngModel)]="datatotal[i].D2"   value="{{d1.D2}}"> </td>
+          <td ><input type="text" class="outlinehide" [(ngModel)]="datatotal[i].D3"  value="{{d1.D3}}"> </td>
+
+          <td ><input type="text" class="outlinehide" [(ngModel)]="datatotal[i].D4"  value="{{d1.D4}}"> </td>
+          <td ><input type="text" class="outlinehide"  [(ngModel)]="datatotal[i].D5"  value="{{d1.D5}}"> </td>
+          <td ><input type="text" class="outlinehide" [(ngModel)]="datatotal[i].D6"  value="{{d1.D6}}"> </td>
+          <td ><input type="text" class="outlinehide" [(ngModel)]="datatotal[i].obj"  value="{{d1.obj}}"> </td>
+
+          <td><button (click)="onSelect(d1)"class="mdl-button mdl-js-button mdl-button--fab mdl-button--mini-fab mdl-button--colored">
+              <i class="material-icons">update</i>
+            </button></td>
+
+            <td><button (click)="onAddObjt(d1)"class="mdl-button mdl-js-button mdl-button--fab mdl-button--mini-fab mdl-button--colored">
+              <i class="material-icons">add</i>
+            </button></td>
+
+
+
+
+
+        </tr>
+      
+      </tbody>
+    </table>
+  </div>
+</ng-template>
+
+    <h3>Table of Obj :</h3>
+    
+    <div class="marow">
+        <table class="tabresult mdl-data-table mdl-js-data-table mdl-shadow--2dp">
+            <thead>
+              <tr>
+                <th>Id</th>
+                <th>Obj</th>
+                <th class="">Date</th>
+                <th>Position</th>
+              </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let d1 of objs ;let j = index ">
+                    <td>{{j+1}}</td>
+                    <td class="">{{d1.obj}}</td>
+                    <td class="">{{d1.mdate}}</td>
+                    <td class="">{{d1.posx}} -- {{d1.posy}}</td>
+                  </tr>
+             </tbody>
+             </table>
+
+  </div>
+</div>
+
+<br>
+
+<router-outlet></router-outlet>
